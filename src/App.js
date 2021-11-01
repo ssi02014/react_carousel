@@ -15,7 +15,7 @@ const SliderContainer = styled.section`
   display: block;
 `;
 
-const TOTAL_SLIDES = 6;
+const TOTAL_SLIDES = 4;
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);

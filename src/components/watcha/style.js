@@ -8,9 +8,7 @@ export const EmbedRow = styled.li`
   list-style: none;
 `;
 
-export const SliderRow = styled.div``;
-
-export const Row = styled.div`
+export const SliderRow = styled.div`
   position: relative;
   white-space: nowrap;
   padding-left: 4%;
@@ -63,4 +61,9 @@ export const Button = styled.button`
     background-color: coral;
     color: #fff;
   }
+`;
+
+export const TitleContainer = styled.div`
+  height: 3.125vw;
+  margin-top: 0.234375vw;
 `;
