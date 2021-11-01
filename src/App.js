@@ -1,16 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import styled from "styled-components";
 import Slide from "./components/Slide";
-import img1 from "./static/images/m1d69XO_large.jpg";
-import img2 from "./static/images/m1WwQjd_large.jpg";
-import img3 from "./static/images/m1WwZ75_large.jpg";
-import img4 from "./static/images/m2dj3a5_large.jpg";
-import img5 from "./static/images/m2djy9O_large.jpg";
-import img6 from "./static/images/m2djA9O_large.jpg";
-import img7 from "./static/images/m2WyDM5_large.jpg";
-import img8 from "./static/images/m2WyPk5_large.jpg";
-import img9 from "./static/images/m2WyrrO_large.jpg";
-import img10 from "./static/images/m2WywMd_large.jpg";
+
+import data from "./config/dummy.json";
 
 import "./App.css";
 
@@ -37,7 +29,7 @@ const SliderContainer = styled.div`
   display: flex;
 `;
 
-const TOTAL_SLIDES = 2;
+const TOTAL_SLIDES = 6;
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -63,20 +55,29 @@ function App() {
     slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
   }, [currentSlide]);
 
+  const image = useMemo(() => {
+    let img = [];
+
+    if (data.recommendations.length > 0) {
+      data.recommendations.map((el) => {
+        el.contents.map((content) => {
+          if (content.thumbnail) {
+            img.push(content.thumbnail.medium);
+          }
+        });
+      });
+    }
+    return img;
+  }, []);
+
   return (
     <Container>
       {currentSlide}
       <SliderContainer ref={slideRef}>
-        <Slide img={img1} />
-        <Slide img={img2} />
-        <Slide img={img3} />
-        <Slide img={img4} />
-        <Slide img={img5} />
-        <Slide img={img6} />
-        <Slide img={img7} />
-        <Slide img={img8} />
-        <Slide img={img9} />
-        <Slide img={img10} />
+        {image &&
+          image.map((el) => {
+            return <Slide img={el} />;
+          })}
       </SliderContainer>
       <Button onClick={prevSlide}>Previous Slide</Button>
       <Button onClick={nextSlide}>Next Slide</Button>
