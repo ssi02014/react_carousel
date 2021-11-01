@@ -1,7 +1,7 @@
 import React from "react";
 import { Image } from "./style";
 
-const Slice = ({ img }) => {
+const Slide = ({ img }) => {
   return (
     <>
       <Image src={img}></Image>
@@ -9,4 +9,4 @@ const Slice = ({ img }) => {
   );
 };
 
-export default Slice;
+export default Slide;
