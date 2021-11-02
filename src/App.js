@@ -9,57 +9,39 @@ import Watcha from "./components/watcha";
 const Container = styled.div`
   width: 100%;
   overflow: hidden;
+  background-color: rgb(20, 21, 23);
 `;
 
-const SliderContainer = styled.section`
-  display: block;
-`;
-
-const TOTAL_SLIDES = 4;
+const SliderContainer = styled.section``;
 
 function App() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const image = useMemo(() => {
+    let img = [];
 
-  const nextSlide = () => {
-    if (currentSlide >= TOTAL_SLIDES) {
-      setCurrentSlide(0);
-    } else {
-      setCurrentSlide(currentSlide + 1);
+    if (data.recommendations.length > 0) {
+      data.recommendations.forEach((el) => {
+        const temp = [];
+        el.contents.forEach((content) => {
+          if (content.thumbnail) {
+            temp.push(content.thumbnail.medium);
+          }
+        });
+        img = [...img, temp];
+      });
     }
-  };
-  const prevSlide = () => {
-    if (currentSlide === 0) {
-      setCurrentSlide(TOTAL_SLIDES);
-    } else {
-      setCurrentSlide(currentSlide - 1);
-    }
-  };
-
-  // const image = useMemo(() => {
-  //   let img = [];
-
-  //   if (data.recommendations.length > 0) {
-  //     data.recommendations.map((el) => {
-  //       el.contents.map((content) => {
-  //         if (content.thumbnail) {
-  //           img.push(content.thumbnail.medium);
-  //         }
-  //       });
-  //     });
-  //   }
-  //   return img;
-  // }, []);
+    return img;
+  }, []);
 
   return (
     <Container>
-      {currentSlide}
-      <SliderContainer>
-        <Watcha
-          currentSlide={currentSlide}
-          prev={prevSlide}
-          next={nextSlide}
-        ></Watcha>
-      </SliderContainer>
+      {image &&
+        image.map((el, idx) => {
+          return (
+            <SliderContainer key={idx}>
+              <Watcha image={el} />
+            </SliderContainer>
+          );
+        })}
     </Container>
   );
 }
