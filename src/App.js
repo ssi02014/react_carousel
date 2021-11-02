@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 
 import data from "./config/dummy.json";

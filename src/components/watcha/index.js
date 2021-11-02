@@ -1,10 +1,4 @@
-import React, {
-  useRef,
-  useEffect,
-  useState,
-  useMemo,
-  useCallback,
-} from "react";
+import React, { useRef, useState, useMemo } from "react";
 import {
   EmbedRow,
   Row,
@@ -54,33 +48,7 @@ const Watcha = ({ id, image }) => {
     }, 1000);
   };
 
-  // const transformImage = useCallback(
-  //   (current, direction) => {
-  //     let img = _.cloneDeep(imageItem);
-
-  //     console.log(current);
-
-  //     if (direction === 1) {
-  //       const splitImg = img.filter((el) => el.pointer === current);
-  //       img.splice(0, splitImg.length);
-  //       img = [...img, ...splitImg];
-  //     }
-
-  //     // else if (direction === -1) {
-  //     //   const splitImg = img.filter((el) => el.pointer !== current);
-
-  //     //   img.splice(0, img.length - splitImg.length);
-  //     //   img = [...splitImg, ...img];
-  //     // }
-
-  //     setImageItem(img);
-  //   },
-  //   [imageItem]
-  // );
-
   const transformNextImage = (current, direction) => {
-    const init = imageItem;
-    // const transforms = [...init];
     const indexList = item.map((v, i) => i);
 
     if (direction === 1) {
@@ -89,18 +57,11 @@ const Watcha = ({ id, image }) => {
       indexList.push(...indexList.splice(6, indexList.length));
     }
 
-    console.log(indexList);
-
     const newItem = indexList.map((v, i) => {
       return imageItem[v];
     });
 
     setImageItem(newItem);
-    // const splitImg = init.filter((el) => el.pointer === current);
-    // transforms.splice(0, splitImg.length);
-    // transforms.push(...splitImg);
-
-    // setTransformItem(transforms);
   };
 
   const animation = (direction = 1) => {
@@ -110,7 +71,7 @@ const Watcha = ({ id, image }) => {
 
   const offAnimation = () => {
     slideRef.current.style.transition = "none";
-    slideRef.current.style.transform = `translateX(0%)`;
+    slideRef.current.style.transform = `translateX(-0%)`;
   };
 
   return (
@@ -118,9 +79,7 @@ const Watcha = ({ id, image }) => {
       <SlideRow>
         <Row>
           <MovieList ref={slideRef} id={id}>
-            {imageItem.map((el, idx) => {
-              return;
-            })}
+            {imageItem}
           </MovieList>
         </Row>
         <ButtonAreaRight>
