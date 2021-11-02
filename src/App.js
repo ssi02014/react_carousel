@@ -20,12 +20,24 @@ function App() {
 
     if (data.recommendations.length > 0) {
       data.recommendations.forEach((el) => {
-        const temp = [];
-        el.contents.forEach((content) => {
+        let temp = [];
+        el.contents.forEach((content, idx) => {
           if (content.thumbnail) {
-            temp.push(content.thumbnail.medium);
+            temp.push({
+              url: content.thumbnail.medium,
+              pointer: 0,
+              key: idx,
+            });
           }
         });
+
+        temp = temp.map((el, idx) => {
+          return {
+            ...el,
+            pointer: Math.floor(idx / 5),
+          };
+        });
+
         img = [...img, temp];
       });
     }

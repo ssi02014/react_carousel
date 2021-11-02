@@ -52,7 +52,7 @@ export const StyledBackground = styled.span`
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  transition: all 420ms ease 0s;
+  /* transition: all 420ms ease 0s; */
   padding-bottom: 4.9vw;
 `;
 
